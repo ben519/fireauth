@@ -6,30 +6,28 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 
 export function Home() {
-  const [authUser, setAuthUser] = useState()
+  const [authUser, setAuthUser] = useState(undefined)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
-        console.log("usr", JSON.stringify(user))
-        setAuthUser(user)
-      } else {
-        // User is signed out
-      }
+      // user will be an object or null
+      setAuthUser(user)
     })
 
     return unsubscribe
   }, [])
 
-
   return (
-    authUser
-      ? <button>Sign out</button>
-      : <>
-        <Link href="/signup">Sign up</Link>
-        <span> | </span>
-        <Link href="/signin">Sign in</Link>
-      </>
+    authUser === undefined
+      ? <div>Loading...</div>
+      : (
+        authUser
+          ? <button>Sign out</button>
+          : <>
+            <Link href="/signup">Sign up</Link>
+            <span> | </span>
+            <Link href="/signin">Sign in</Link>
+          </>
+      )
   )
 }
