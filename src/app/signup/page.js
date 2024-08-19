@@ -3,7 +3,7 @@ import { SignUpForm } from "./SignUpForm"
 export default function SignupPage() {
   return (
     <>
-      <div>Signup page</div>
+      <div>Sign up page</div>
       <SignUpForm />
     </>
   )

@@ -1,3 +1,10 @@
+import { Home } from "./Home"
+
 export default function HomePage() {
-  return <div>Home page</div>
+  return (
+    <>
+      <div>Home page</div>
+      <Home />
+    </>
+  )
 }

@@ -2,11 +2,13 @@
 
 import { auth } from "@/firebase/firebase"
 import { createUserWithEmailAndPassword } from "firebase/auth"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export function SignUpForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const router = useRouter()
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
@@ -14,6 +16,7 @@ export function SignUpForm() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("userCredential", JSON.stringify(userCredential))
+        router.push("/")
       })
       .catch((error) => {
         console.log("Error:", error)
