@@ -15,7 +15,7 @@ export function SignUpForm() {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log("userCredential", JSON.stringify(userCredential))
+        // console.log("userCredential", JSON.stringify(userCredential))
         router.push("/")
       })
       .catch((error) => {
