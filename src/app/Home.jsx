@@ -1,7 +1,7 @@
 "use client"
 
 import { auth } from "@/firebase/firebase"
-import { onAuthStateChanged } from "firebase/auth"
+import { onAuthStateChanged, signOut } from "firebase/auth"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
@@ -10,19 +10,21 @@ export function Home() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      // user will be an object or null
       setAuthUser(user)
     })
-
     return unsubscribe
   }, [])
+
+  const handleSignOut = () => {
+    signOut(auth)
+  }
 
   return (
     authUser === undefined
       ? <div>Loading...</div>
       : (
         authUser
-          ? <button>Sign out</button>
+          ? <button onClick={ handleSignOut }>Sign out</button>
           : <>
             <Link href="/signup">Sign up</Link>
             <span> | </span>
